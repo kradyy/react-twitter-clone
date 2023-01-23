@@ -9,9 +9,6 @@ export default defineType({
       name: 'text',
       title: 'Text in tweet',
       type: 'string',
-      options: {
-       maxLength: 400
-      }
     }),
     defineField({
       name: 'blockTweet',

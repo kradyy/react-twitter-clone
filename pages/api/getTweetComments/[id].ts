@@ -12,8 +12,7 @@ export default async function handler(
 ) {
     const {id} = req.query
 
-    if(!id) 
-        return res.status(400).json("No id provided")
+    if(!id) return res.status(400)
     
     const comments: Comment[] = await sanityClient.fetch(
         groq`

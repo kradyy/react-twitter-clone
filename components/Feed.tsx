@@ -5,6 +5,8 @@ import TweetComponent from './TweetComponent'
 import { Tweet } from '../typings'
 import { fetchTweets } from '../utilities/fetchTweets'
 import toast from 'react-hot-toast'
+import { useEffect } from 'react'
+import FadeIn from 'react-fade-in'
 
 interface Props {
   tweets: Tweet[]
@@ -26,22 +28,19 @@ function Feed({tweets: TweetProps}: Props) {
   }
 
   return (
-    <div className="col-span-7 lg:col-span-5 border-x">
+    <div className="col-span-7 lg:col-span-5 border-x overflow-scroll max-h-screen scrollbar-hide">
       <div className="flex p-5 items-center justify-between">
           <h1 className="pb-0 text-xl font-bold">Feed</h1>
           <ArrowPathIcon onClick={handleRefresh} className="h-8 w-8 cursor-pointer text-primary transition-all duration-500 ease-out hover:rotate-180 active:scale-125" />
       </div>
 
       <div>
-        <TweetBox />
+        <TweetBox setTweets={setTweets} />
       </div>
       
-      
-      <div>
-        {tweets.map((tweet) => (
-          <TweetComponent key={tweet._id} tweet={tweet} />
-        ))}
-      </div>
+      {tweets.map((tweet) => (
+        <TweetComponent key={tweet._id} tweet={tweet} />
+      ))}
     </div>
   )
 }

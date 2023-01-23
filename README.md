@@ -1,6 +1,9 @@
-# Next.js + Tailwind CSS Example
+# Twitter - Next.js + Tailwind CSS
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+This is a Twitter clone built with Next.js and Tailwind CSS. It is a merely a learning project and will be updated as I learn more about Next.js and Tailwind CSS. Features available are the ability to login, logout, post tweets and comment on tweets.
+
+## See it live 😺
+
 
 ## Deploy your own
 
@@ -25,3 +28,17 @@ pnpm create next-app --example with-tailwindcss with-tailwindcss-app
 ```
 
 Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+## Env file requirements
+
+NEXT_PUBLIC_SANITY_PROJECT_ID=
+NEXT_PUBLIC_SANITY_DATASET=production
+NEXT_PUBLIC_SANITY_API_VERSION=2021-06-07
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+NEXT_PUBLIC_SANITY_API_TOKEN=s
+
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=http://localhost:3000
+
+TWITTER_CLIENT_ID=
+TWITTER_CLIENT_SECRET=

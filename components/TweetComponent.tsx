@@ -11,6 +11,7 @@ import { fetchComments } from "../utilities/fetchComments";
 import { Comment } from "../typings";
 import { postComment } from "../utilities/postComment";
 import FadeIn from 'react-fade-in';
+import { useSession } from "next-auth/react";
 
 interface Props {
   tweet: Tweet;
@@ -30,9 +31,11 @@ function TweetComponent({ tweet }: Props) {
 
   const [isPosting, setIsPosting] = React.useState<Boolean>(false);
 
+  const { data: session } = useSession()
+
   const handleComment = async () => {
     const comment = commentRef.current?.value;
-
+    
     if (!comment) {
       return;
     }
@@ -161,10 +164,12 @@ function TweetComponent({ tweet }: Props) {
           </div>
         )}
 
+        {session && (
         <div className={`${isPosting ? 'opacity-40 pointer-events-none' : ''}`}>
           <textarea ref={commentRef} className="w-full h-20 border border-gray-200 rounded-lg p-2 mt-5" placeholder="Tweet your reply" />
           <button onClick={handleComment} className="bg-primary text-white rounded-full px-4 py-2 mt-2 transition-all duration-500 ease-out active:scale-125">Reply</button>
         </div>
+      )}
       </>
 
       )}
