@@ -2,8 +2,9 @@
 
 This is a Twitter clone built with Next.js and Tailwind CSS. It is a merely a learning project and will be updated as I learn more about Next.js and Tailwind CSS. Features available are the ability to login, logout, post tweets and comment on tweets.
 
-## See it live 😺
+## See it live (Vercel) 😺
 
+https://react-twitter-clone-phi.vercel.app/
 
 ## Deploy your own
 
