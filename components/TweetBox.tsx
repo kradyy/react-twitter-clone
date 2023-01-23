@@ -4,16 +4,19 @@ import { CalendarIcon, FaceSmileIcon, FaceFrownIcon, PhotoIcon, MagnifyingGlassC
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import { postTweet } from "../utilities/postTweet";
-import { TweetBody } from "../typings";
+import { Tweet, TweetBody } from "../typings";
+import { fetchTweets } from "../utilities/fetchTweets";
 
-function TweetBox() {
+interface Props {
+  setTweets: React.Dispatch<React.SetStateAction<Tweet[]>>
+}
+
+function TweetBox({setTweets}: Props) {
   const [tweet, setTweet] = useState<string>('');
   const [image, setImage] = useState<string>('');
   const { data: session } = useSession();
 
   const [imageUrlBoxIsOpen, setImageUrlBoxIsOpen] = useState<boolean>(false);
-
-  console.log(session)
 
   const imageInputRef = useRef<HTMLInputElement>(null);
 
@@ -57,10 +60,14 @@ function TweetBox() {
       image: image || '',
     }
 
-    console.log('session?.user :>> ', session?.user);
     const result = await postTweet(tweetBody);
 
-    console.log(result);
+    if(result.message.transactionId) {
+      const getTweets = await fetchTweets();
+      setTweets(getTweets);
+      setTweet('')
+      setImage('')
+    }
   }
 
   return (
@@ -93,7 +100,7 @@ function TweetBox() {
                 <CalendarIcon className="h-6 w-6" />
               </div>
 
-              <button type="submit" onClick={handleSubmit} className="bg-primary text-white rounded-full px-4 py-2 font-bold disabled:opacity-40"
+              <button type="submit" onClick={handleSubmit} className="bg-primary text-white rounded-full px-4 py-2 font-bold disabled:opacity-40 transition-all duration-500 ease-out active:scale-125 disabled:pointer-events-none"
               disabled={!tweet.length || !session}>
                 Tweet
               </button>
@@ -103,7 +110,7 @@ function TweetBox() {
         {image && !imageUrlBoxIsOpen && (
           <div className="flex items-center justify-between mt-4 relative w-fit">
             <img src={image} alt="tweet" className="object-contain shadow-lg" />
-            <button className="bg-primary text-white px-2 hover:scale-105 transition-all duration-500 py-1 absolute rounded-full text-sm top-0 right-0 -m-2 shadow-lg" onClick={() => setImage('')}>
+            <button className="bg-primary text-white px-2 hover:scale-105 transition-all duration-500 py-1 absolute rounded-full text-sm top-0 right-0 -m-2 shadow-lg " onClick={() => setImage('')}>
              ✗
             </button>
           </div>
@@ -112,7 +119,7 @@ function TweetBox() {
         {imageUrlBoxIsOpen && (
             <form onSubmit={addImageToTweet} className="flex items-center rounded-lg px-4 py-2 mt-4 bg-primary/90">
               <input type="text" placeholder="Image URL" className="flex-1 focus:outline-none text-white bg-transparent placeholder:text-white" ref={imageInputRef} />
-              <button type="submit" className="bg-primary text-white rounded-full px-4 py-2 font-bold disabled:opacity-40"
+              <button type="submit" className="bg-primary text-white rounded-full px-4 py-2 font-bold disabled:opacity-40  transition-all duration-500 ease-out active:scale-125"
               disabled={!session}>
                 Add image
               </button>
