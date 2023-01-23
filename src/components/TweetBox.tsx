@@ -71,8 +71,8 @@ function TweetBox({setTweets}: Props) {
   }
 
   return (
-    <div className="flex items-center p-5 space-x-2">
 
+    <div className="flex items-center p-5 space-x-2">
       <div className="h-24 self-start flex items-center">
         <img
           src={session?.user?.image || `./avatar.png`}
@@ -100,7 +100,7 @@ function TweetBox({setTweets}: Props) {
                 <CalendarIcon className="h-6 w-6" />
               </div>
 
-              <button type="submit" onClick={handleSubmit} className="bg-primary text-white rounded-full px-4 py-2 font-bold disabled:opacity-40 transition-all duration-500 ease-out active:scale-125 disabled:pointer-events-none"
+              <button  type="submit" onClick={handleSubmit} className="bg-primary text-white rounded-full px-4 py-2 font-bold disabled:opacity-40 transition-all duration-500 ease-out active:scale-125 disabled:pointer-events-none"
               disabled={!tweet.length || !session}>
                 Tweet
               </button>

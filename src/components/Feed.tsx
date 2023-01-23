@@ -7,6 +7,7 @@ import { fetchTweets } from '../utilities/fetchTweets'
 import toast from 'react-hot-toast'
 import { useEffect } from 'react'
 import FadeIn from 'react-fade-in'
+import { useSession } from 'next-auth/react'
 
 interface Props {
   tweets: Tweet[]
@@ -14,6 +15,8 @@ interface Props {
 
 function Feed({tweets: TweetProps}: Props) {
   const [tweets, setTweets] = React.useState<Tweet[]>(() => TweetProps)
+
+  const { data: session } = useSession();
 
   const handleRefresh = async () => {
     const twitterToast = toast.loading('Fetching tweets .. ', { duration: 1000, id: 'fetchingTweets' } )
@@ -35,6 +38,13 @@ function Feed({tweets: TweetProps}: Props) {
       </div>
 
       <div>
+
+      {  session && (
+      <div className="flex px-5 items-center justify-between mt-4 bg-gray-50 py-5 rounded-lg mx-3">
+        You need to be logged in to post a tweet. Use the "Sign In" button in the left menu to authenticate.
+        </div>  
+        )
+        }
         <TweetBox setTweets={setTweets} />
       </div>
       
