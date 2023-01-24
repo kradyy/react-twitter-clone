@@ -41,7 +41,7 @@ function Feed({tweets: TweetProps}: Props) {
 
       { !session && (
       <div className="flex px-5 items-center justify-between mt-4 bg-gray-50 py-5 rounded-lg mx-3">
-        You need to be logged in to post a tweet. Use the "Sign In" button in the left menu to authenticate.
+        You need to be logged in to post or comment a tweet. Use the "Sign In" button in the left menu to authenticate.
         </div>  
         )
         }

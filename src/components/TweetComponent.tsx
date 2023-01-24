@@ -20,7 +20,7 @@ interface Props {
 function TweetComponent({ tweet }: Props) {
   const author = tweet.author?.length ? tweet.author[0] : [];
 
-  const authorImageUrl = author.image?.asset?.url;
+  const authorImageUrl = `./avatar.png`; // author.image?.asset?.url;
   const authorName = author.name || "Anonymous";
 
   const commentRef = React.useRef<HTMLTextAreaElement>(null);
@@ -108,7 +108,7 @@ function TweetComponent({ tweet }: Props) {
         </div>
       </div>
       <div className="flex justify-between mt-5">
-        <div onClick={() => setDisplayComments((prev: Boolean) => !prev)} className={`flex cursor-pointer items-center space-x-3 ${displayComments ? 'text-primary' : 'text-gray-400'}`}>
+        <div onClick={() => session && setDisplayComments((prev: Boolean) => !prev)} className={`flex cursor-pointer items-center space-x-3 ${displayComments ? 'text-primary' : 'text-gray-400'}`}>
           <ChatBubbleLeftRightIcon className={`h-5 w-5 ${displayComments && 'text-primary'}`}  /> <p className="text-inherit">{comments.length}</p>
         </div>
         <div className="flex cursor-pointer items-center space-x-3 text-gray-400">

@@ -75,7 +75,7 @@ function TweetBox({setTweets}: Props) {
     <div className="flex items-center p-5 space-x-2">
       <div className="h-24 self-start flex items-center">
         <img
-          src={session?.user?.image || `./avatar.png`}
+          src={`./avatar.png`}
           alt="avatar"
           className="h-14 w-14  object-cover rounded-full"
         />
